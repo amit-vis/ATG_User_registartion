@@ -16,9 +16,9 @@ This project only where user can signup and signin theirselves:
 ## Installation
 Install My Projects Using npm
 ```bash
-    git clone https://github.com/amit-vis/e-learning_API.git
+    git clone https://github.com/amit-vis/ATG_User_registartion
     npm install
-    cd e-learning_API
+    cd ATG_User_registartion
 ```
 
 ## Running Test
