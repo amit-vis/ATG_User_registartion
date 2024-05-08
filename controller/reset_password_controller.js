@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 
 module.exports.create = async (req, res)=>{
     try {
-        const user = await User.findByPk(req.params.id);
+        const user = await User.findById(req.params.id);
         if(!user){
             return res.status(400).json({
                 message: "User not found or user does not exist!!",
@@ -33,10 +33,10 @@ module.exports.create = async (req, res)=>{
 
 module.exports.updatePassword = async (req, res)=>{
     try {
-        const {password, cpassword, email, token}= req.body;
-        const getToken = await Token.findOne({where:{
+        const {password, cpassword, token}= req.body;
+        const getToken = await Token.findOne({
             token: token
-        }});
+        });
         if(!getToken){
             return res.status(400).json({
                 message: "Token does not exist or not found!!",
@@ -49,9 +49,9 @@ module.exports.updatePassword = async (req, res)=>{
                 success: false
             })
         }
-        const user = await User.findOne({where:{
+        const user = await User.findOne({
             email: getToken.email
-        }})
+        })
         if(!user){
             return res.status(402).json({
                 message:"user does not exist or not available!!",

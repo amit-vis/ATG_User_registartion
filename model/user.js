@@ -1,31 +1,31 @@
-const {DataTypes} = require('sequelize');
-const db = require('../config/database');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const User = db.define('User',{
-    username:{
-        type: DataTypes.STRING,
-        allowNull: false,
+const userSchema = new Schema({
+    username: {
+        type: String,
+        required: true,
         unique: true,
-        validate:{
-            isAlphanumeric: true,
-            isCombination(value){
-                if(!/[a-zA-Z]/.test(value) || !/\d/.test(value)){
-                    throw new Error('Username must contain both letters and numbers.');
-                }
-            }
+        validate: {
+            validator: function (value) {
+                return /^[a-zA-Z0-9]+$/.test(value);
+            },
+            message: 'Username must contain only letters and numbers.'
         }
     },
-    email:{
-        type: DataTypes.STRING,
-        allowNull: false,
+    email: {
+        type: String,
+        required: true,
         unique: true
     },
-    password:{
-        type: DataTypes.STRING,
-        allowNull:false
+    password: {
+        type: String,
+        required: true
     }
-},{
+}, {
     timestamps: true
-})
+});
+
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

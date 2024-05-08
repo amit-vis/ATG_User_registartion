@@ -1,23 +1,24 @@
-const {DataTypes} = require('sequelize');
-const db = require('../config/database');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const Token = db.define('Token',{
-    token:{
-        type: DataTypes.STRING,
-        allowNull: false
+const tokenSchema = new Schema({
+    token: {
+        type: String,
+        required: true
     },
-    email:{
-        type: DataTypes.STRING,
-        allowNull: false
-
+    email: {
+        type: String,
+        required: true
     },
-    isValid:{
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: true
+    isValid: {
+        type: Boolean,
+        required: true,
+        default: true
     }
-},{
+}, {
     timestamps: true
 });
+
+const Token = mongoose.model('Token', tokenSchema);
 
 module.exports = Token;

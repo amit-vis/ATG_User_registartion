@@ -1,6 +1,7 @@
 
 const User = require('../model/user');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports.create = async (req, res)=>{
     try {
@@ -11,10 +12,10 @@ module.exports.create = async (req, res)=>{
                 success: false
             })
         }
-        const user = await User.findOne({where:{
+        const user = await User.findOne({
             email: email,
             username: username
-        }})
+        })
         if(user){
             return res.status(401).json({
                 message:"email or username already registered!!",
@@ -46,9 +47,9 @@ module.exports.login = async (req, res)=>{
                 success: false
             })
         }
-        const user = await User.findOne({where:{
+        const user = await User.findOne({
             username: username
-        }})
+        })
         if(!user|| !(await bcrypt.compare(password,user.password))){
             return res.status(401).json({
                 message: "Invalid username or password!!",
@@ -58,6 +59,9 @@ module.exports.login = async (req, res)=>{
         return res.status(200).json({
             message: "User Logged In successfully!!",
             success: true,
+            data:{
+                token: jwt.sign(user.toJSON(), process.env.SECRET_KEY, {expiresIn: '1h'})
+            }
             
         })
     } catch (error) {
