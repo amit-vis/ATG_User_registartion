@@ -2,15 +2,7 @@
 
 ## Project Overview: User Registartion
 
-This project only where user can signup and signin theirselves:
-
-### User Sign and Signup
-1. User can sigup and sign with the plateform.
-
-### Mail Notifications:
-
-1. Users receive notifications via email for important updates such as course enrollment confirmations, Registration and forget password key.
-2. Email notifications help in keeping users engaged and informed about platform activities.
+This is the social media websites where user can create the account and logged the account moreover they can create the post like the post, create the comment and like the comment:
 
 
 ## Installation
@@ -37,18 +29,33 @@ To run tests, run the following command
 ## Folder Structure
 * config
     - database.js
+    - limitter.js
     - nodemailers.js
+    - passport-jwt.js
 * controllers
+    - comment_controller.js
     - home_controller.js
+    - like_controller.js
+    - post_controller.js
     - user_controller.js
-    - token_controller.js
+    - reset_password_controller.js
 * models
+    - comment.js
+    - like.js
+    - post.js
     - user.js
     - token.js
+    - user.js
 * routes
+    - comment.js
     - index.js
+    - like.js
+    - post.js
     - user.js
     - token.js
+    - user.js
+* uploads
+    * postPath
 - index.js
 - .gitignore
 - package-lock.json
