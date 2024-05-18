@@ -60,7 +60,7 @@ module.exports.login = async (req, res)=>{
             message: "User Logged In successfully!!",
             success: true,
             data:{
-                token: jwt.sign(user.toJSON(), process.env.SECRET_KEY, {expiresIn: '1h'})
+                token: jwt.sign(user.toJSON(), process.env.SECRET_KEY, {expiresIn: '30m'})
             }
             
         })
